@@ -29,8 +29,8 @@ NSString *fileToDownload;
     self.progress.progress = 0;
     self.progress.hidden = YES;
   
-    fileToDownload = @"http://www.nhc.noaa.gov/tafb_latest/USA_latest.pdf";
-//    fileToDownload = @"https://archive.org/details/1mbFile";
+//    fileToDownload = @"http://www.nhc.noaa.gov/tafb_latest/USA_latest.pdf";
+    fileToDownload = @"https://archive.org/details/1mbFile";
 //    fileToDownload = @"https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/ObjC_classic/FoundationObjC.pdf";
 }
 
@@ -40,10 +40,10 @@ NSString *fileToDownload;
 }
 - (IBAction)startButton:(id)sender {
 
-//    if (!downloadManager) {
+    if (!downloadManager) {
         downloadManager = [[BTSManager alloc] initWithUrlString:fileToDownload];
         downloadManager.delegate = self;
-//    }
+    }
     [downloadManager.task resume];
     progress.hidden = NO;
     
@@ -53,12 +53,24 @@ NSString *fileToDownload;
 - (void) downloadProgressUpdated {
     NSLog(@"ViewController downloadProgressUpdated %f", downloadManager.progress);
     progress.progress = downloadManager.progress;
-    label.text = [NSString stringWithFormat:@"%d%%",(int) downloadManager.progress*100];
+    label.text = [NSString stringWithFormat:@"%g%%",downloadManager.progress*100];
 }
 
 - (void) didFinishDownload {
     NSLog(@"ViewController didFinishDownload");
-    label.text = @"Done!";
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSError *attributesError = nil;
+    NSDictionary *attributes = [fileManager attributesOfItemAtPath:[downloadManager.savedURL path] error:&attributesError];
+    
+    if (attributesError) {
+        NSLog(@"error: %@",[attributesError localizedDescription]);
+    }
+    
+    NSLog(@"file saved at: %@",[[downloadManager.savedURL absoluteString] lastPathComponent] );
+    progress.progress = 1;
+    label.text = [NSString stringWithFormat:@"file has %llu bytes",[attributes fileSize]];
 }
 
 @end

@@ -28,8 +28,10 @@ extern NSString * const BTSdownloadProgressUpdatedEvent;
 @property (nonatomic, strong) NSString *urlString;
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSURLSessionDownloadTask *task;
-@property (nonatomic) float progress;
 
+@property (nonatomic, strong) NSURL *savedURL;
+
+@property (nonatomic) float progress;
 @property (nonatomic, weak) id delegate;
 
 

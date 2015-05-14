@@ -24,7 +24,7 @@ NSString * const BTSdownloadProgressUpdatedEvent = @"BTSdownloadProgressUpdatedE
             
             if (self.task) {
                 self.progress = 0;
-                [self dispatchProgressUpdateEvents];
+                [self dispatchProgressUpdateEvent];
                 
                 [self startDownload];
                 
@@ -43,35 +43,33 @@ NSString * const BTSdownloadProgressUpdatedEvent = @"BTSdownloadProgressUpdatedE
         [self startDownload];
 //        [self.task resume];
     }
+    
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
     
-    if (downloadTask == self.task) {
+//    if (downloadTask == self.task) {
         if (self.progress >= 1) {
-            NSLog(@"BTSManager Download completed!");
-            if ([self.delegate respondsToSelector:@selector(didFinishDownload)]) {
-                [self.delegate didFinishDownload];
-            }
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:BTSdidFinishDownloadEvent object:self];
+            self.savedURL = [self saveFile:location];
+
+            [self dispatchdidFinishDownloadEvent];
         }
-    } else {
-        NSLog(@"BTSManager something else has been completed! %@ vs %@", downloadTask, self.task);
-    }
+//    } else {
+//        NSLog(@"BTSManager something else has been completed! %@ vs %@", downloadTask, self.task);
+//    }
 
     
     //TODO: decide what to do with data downloaded
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite {
-    if (downloadTask == self.task) {
+//    if (downloadTask == self.task) {
         self.progress = (float) totalBytesWritten/totalBytesExpectedToWrite;
-        NSLog(@"BTSManager DownloadTask: %@ totalBytesWritten: %lld totalBytesExpectedToWrite: %lld / progress: %f", downloadTask, totalBytesWritten,totalBytesWritten,self.progress);
-        [self dispatchProgressUpdateEvents];
-    } else {
-        NSLog(@"BTSManager DownloadTask is something different than me");
-    }
+        NSLog(@"BTSManager DownloadTask: %@ totalBytesWritten: %lld totalBytesExpectedToWrite: %lld / progress: %f", downloadTask, totalBytesExpectedToWrite,totalBytesWritten,self.progress);
+        [self dispatchProgressUpdateEvent];
+//    } else {
+//        NSLog(@"BTSManager DownloadTask is something different than me");
+//    }
     
     
 }
@@ -83,6 +81,27 @@ NSString * const BTSdownloadProgressUpdatedEvent = @"BTSdownloadProgressUpdatedE
 }
 
 #pragma mark - Helpers
+
+- (NSURL *) saveFile: (NSURL*) downloadURL {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSArray *URLs = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *documentsDirectory = [URLs objectAtIndex:0];
+    
+    NSURL *originalURL = [[self.task originalRequest] URL];
+    NSURL *destinationURL = [documentsDirectory URLByAppendingPathComponent:[originalURL lastPathComponent]];
+    NSError *errorCopy;
+    
+    // For the purposes of testing, remove any esisting file at the destination.
+    [fileManager removeItemAtURL:destinationURL error:NULL];
+    [fileManager copyItemAtURL:downloadURL toURL:destinationURL error:&errorCopy];
+    
+    if (errorCopy) {
+        NSLog(@"BTSManager saveFile error: %@",[errorCopy localizedDescription]);
+    }
+    
+    return destinationURL;
+}
 
 - (void) startDownload {
     NSURL *requestURL = [NSURL URLWithString:self.urlString];
@@ -96,7 +115,17 @@ NSString * const BTSdownloadProgressUpdatedEvent = @"BTSdownloadProgressUpdatedE
     
 }
 
-- (void) dispatchProgressUpdateEvents {
+- (void) dispatchdidFinishDownloadEvent {
+    NSLog(@"BTSManager Download completed!");
+    if ([self.delegate respondsToSelector:@selector(didFinishDownload)]) {
+        [self.delegate didFinishDownload];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:BTSdidFinishDownloadEvent object:self];
+
+}
+
+- (void) dispatchProgressUpdateEvent {
     if ([self.delegate respondsToSelector:@selector(downloadProgressUpdated)]) {
         [self.delegate downloadProgressUpdated];
     }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E11f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,10 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1NQ-zP-nBC">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1NQ-zP-nBC">
                                 <rect key="frame" x="85" y="210" width="150" height="2"/>
                             </progressView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xf2-Fs-Qza">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xf2-Fs-Qza">
                                 <rect key="frame" x="144" y="133" width="33" height="30"/>
                                 <state key="normal" title="Start">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,14 +29,24 @@
                                     <action selector="startButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rR0-ij-Cj7"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhz-95-O82">
-                                <rect key="frame" x="85" y="233" width="151" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhz-95-O82">
+                                <rect key="frame" x="161" y="231" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1NQ-zP-nBC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="69" id="5iQ-MR-WyT"/>
+                            <constraint firstAttribute="centerX" secondItem="nhz-95-O82" secondAttribute="centerX" constant="-0.5" id="BhZ-Fd-aBo"/>
+                            <constraint firstItem="nhz-95-O82" firstAttribute="top" secondItem="1NQ-zP-nBC" secondAttribute="bottom" constant="19" id="G1b-ci-7EL"/>
+                            <constraint firstAttribute="centerX" secondItem="1NQ-zP-nBC" secondAttribute="centerX" id="IbL-iP-kA3"/>
+                            <constraint firstItem="xf2-Fs-Qza" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="128" id="by5-JT-nML"/>
+                            <constraint firstItem="1NQ-zP-nBC" firstAttribute="top" secondItem="xf2-Fs-Qza" secondAttribute="bottom" constant="47" id="fmQ-fT-OS4"/>
+                            <constraint firstAttribute="centerX" secondItem="xf2-Fs-Qza" secondAttribute="centerX" constant="-0.5" id="h46-9b-YQa"/>
+                            <constraint firstItem="nhz-95-O82" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="211" id="scC-lV-t3A"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="label" destination="nhz-95-O82" id="uiv-9a-arr"/>
