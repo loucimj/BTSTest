@@ -14,6 +14,7 @@
 		41F8FA841B03759F00F61FAF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41F8FA831B03759F00F61FAF /* Images.xcassets */; };
 		41F8FA871B03759F00F61FAF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F8FA851B03759F00F61FAF /* LaunchScreen.xib */; };
 		41F8FA931B03759F00F61FAF /* BTSTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F8FA921B03759F00F61FAF /* BTSTestTests.m */; };
+		41F8FA9E1B037B5D00F61FAF /* BTSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F8FA9D1B037B5D00F61FAF /* BTSManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		41F8FA8C1B03759F00F61FAF /* BTSTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BTSTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41F8FA911B03759F00F61FAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41F8FA921B03759F00F61FAF /* BTSTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTSTestTests.m; sourceTree = "<group>"; };
+		41F8FA9C1B037B5D00F61FAF /* BTSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTSManager.h; sourceTree = "<group>"; };
+		41F8FA9D1B037B5D00F61FAF /* BTSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTSManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				41F8FA831B03759F00F61FAF /* Images.xcassets */,
 				41F8FA851B03759F00F61FAF /* LaunchScreen.xib */,
 				41F8FA761B03759F00F61FAF /* Supporting Files */,
+				41F8FA9C1B037B5D00F61FAF /* BTSManager.h */,
+				41F8FA9D1B037B5D00F61FAF /* BTSManager.m */,
 			);
 			path = BTSTest;
 			sourceTree = "<group>";
@@ -168,6 +173,11 @@
 				TargetAttributes = {
 					41F8FA721B03759F00F61FAF = {
 						CreatedOnToolsVersion = 6.3.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					41F8FA8B1B03759F00F61FAF = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -222,6 +232,7 @@
 				41F8FA7F1B03759F00F61FAF /* ViewController.m in Sources */,
 				41F8FA7C1B03759F00F61FAF /* AppDelegate.m in Sources */,
 				41F8FA791B03759F00F61FAF /* main.m in Sources */,
+				41F8FA9E1B037B5D00F61FAF /* BTSManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

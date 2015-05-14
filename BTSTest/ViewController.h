@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BTSManager.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController  <BTSManagerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIProgressView *progress;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
 @end
 
