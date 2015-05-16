@@ -20,17 +20,25 @@
 BTSManager *downloadManager;
 
 NSString *fileToDownload;
+NSString *fileToUpload;
+NSString *urlToUpload;
+NSString *token;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    token = @"ddoj6a6ti4mhc2fg6pg18ava0mapv1eo";
     
     self.progress.progress = 0;
     self.progress.hidden = YES;
   
-//    fileToDownload = @"http://www.nhc.noaa.gov/tafb_latest/USA_latest.pdf";
-    fileToDownload = @"https://archive.org/details/1mbFile";
+    urlToUpload = @"http://ec2-54-201-123-9.us-west-2.compute.amazonaws.com:8080/VidMob/api/file/upload";
+    fileToUpload = @"USA_latest.pdf";
+    fileToDownload = @"http://www.nhc.noaa.gov/tafb_latest/USA_latest.pdf";
+    
+    
+//    fileToDownload = @"https://archive.org/details/1mbFile";
 //    fileToDownload = @"https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/ObjC_classic/FoundationObjC.pdf";
 }
 
