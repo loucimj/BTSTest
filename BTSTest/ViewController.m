@@ -35,7 +35,8 @@ NSString *token;
   
     urlToUpload = @"http://ec2-54-201-123-9.us-west-2.compute.amazonaws.com:8080/VidMob/api/file/upload";
     fileToUpload = @"USA_latest.pdf";
-    fileToDownload = @"http://www.nhc.noaa.gov/tafb_latest/USA_latest.pdf";
+    fileToDownload = @"http://ec2-54-201-123-9.us-west-2.compute.amazonaws.com:8080/VidMob/api/file/upload";
+//    fileToDownload = @"http://www.nhc.noaa.gov/tafb_latest/USA_latest.pdf";
     
     
 //    fileToDownload = @"https://archive.org/details/1mbFile";
